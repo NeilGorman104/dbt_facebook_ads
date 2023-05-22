@@ -1,0 +1,28 @@
+version: 2
+sources:
+  - name: tap_facebook
+    loader: meltano
+    schema: FIVETRAN_FACEBOOK
+    tables: 
+      - name: account_history
+      - name: ad_history
+      - name: ad_set_history
+      - name: campaign_history
+      - name: ad_conversion
+      - name: campaign_label
+      - name: ad_group_issues_info
+      - name: ad_recommendation
+      - name: adset_schedule
+      - name: ad_campaign_issues_info
+      - name: ad_set_attribution
+      - name: ad_tracking
+      - name: pacing_type
+      - name: creative_history
+      - name: label_history
+      - name: ads
+      - name: adsets
+      - name: adsinsights
+      - name: campaigns
+      - name: creatives
+      - name: adlabels
+      - name: basic_ad

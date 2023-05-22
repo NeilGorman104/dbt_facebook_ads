@@ -3,7 +3,7 @@
 with base as (
 
     select *
-    from {{ var('creative_history') }}
+    from {{ source('tap_facebook', 'creative_history') }}
     where is_most_recent_record = true
 ), 
 

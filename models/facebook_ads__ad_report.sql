@@ -3,14 +3,14 @@
 with report as (
 
     select *
-    from {{ var('basic_ad') }}
+    FROM {{ source('tap_facebook', 'basic_ad') }}
 
 ), 
 
 accounts as (
 
     select *
-    from {{ var('account_history') }}
+    FROM {{ source('tap_facebook', 'account_history') }}
     where is_most_recent_record = true
 
 ),
@@ -18,7 +18,7 @@ accounts as (
 campaigns as (
 
     select *
-    from {{ var('campaign_history') }}
+    FROM {{ source('tap_facebook', 'campaign_history') }}
     where is_most_recent_record = true
 
 ),
@@ -26,7 +26,7 @@ campaigns as (
 ad_sets as (
 
     select *
-    from {{ var('ad_set_history') }}
+    FROM {{ source('tap_facebook', 'ad_set_history') }}
     where is_most_recent_record = true
 
 ),
@@ -34,7 +34,7 @@ ad_sets as (
 ads as (
 
     select *
-    from {{ var('ad_history') }}
+    FROM {{ source('tap_facebook', 'ad_history') }}
     where is_most_recent_record = true
 
 ),
