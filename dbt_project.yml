@@ -13,11 +13,11 @@ vars:
   facebook_ads_database: RYAN_MIRANDA_RAW
   facebook_ads_schema: DBT_MELTANO_FACEBOOK 
   fivetran_facebook:
-    account_history: "{{ ref('stg_facebook_ads__account_history') }}"
-    ad_history: "{{ ref('stg_facebook_ads__ad_history') }}"
-    ad_set_history: "{{ ref('stg_facebook_ads__ad_set_history') }}"
+    account_history: "stg_facebook_ads__account_history"
+    ad_history: "stg_facebook_ads__ad_history"
+    ad_set_history: "stg_facebook_ads__ad_set_history"
 #    TODO model 'basic_ad' model missing from Fivetran
-    basic_ad: "{{ ref('stg_facebook_ads__basic_ad') }}"
-    campaign_history: "{{ ref('stg_facebook_ads__campaign_history') }}"
-    creative_history: "{{ ref('stg_facebook_ads__creative_history') }}"
-    url_tag: "{{ ref('stg_facebook_ads__url_tag') }}"
+    basic_ad: "stg_facebook_ads__basic_ad"
+    campaign_history: "stg_facebook_ads__campaign_history"
+    creative_history: "stg_facebook_ads__creative_history"
+    url_tag: "stg_facebook_ads__url_tag"
