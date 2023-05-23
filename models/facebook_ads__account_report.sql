@@ -3,15 +3,14 @@
 with report as (
 
     select *
-    from {{ var('basic_ad') }}
+    from {{ ref(var('fivetran_facebook')["basic_ad"]) }}
 
 ), 
 
 accounts as (
 
     select *
-    from {{ var('account_history') }}
-    where is_most_recent_record = true
+    from {{ ref(var('fivetran_facebook')["account_history"]) }}
 
 ),
 

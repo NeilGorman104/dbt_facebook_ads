@@ -3,7 +3,7 @@
 with report as (
 
     select *
-    from {{ var('basic_ad') }}
+    from {{ ref(var('fivetran_facebook')["basic_ad"]) }}
 
 ), 
 
@@ -17,7 +17,7 @@ creatives as (
 accounts as (
 
     select *
-    from {{ var('account_history') }}
+    from {{ ref(var('fivetran_facebook')["account_history"]) }}
     where is_most_recent_record = true
 
 ), 
@@ -25,7 +25,7 @@ accounts as (
 ads as (
 
     select *
-    from {{ var('ad_history') }}
+    from {{ ref(var('fivetran_facebook')["ad_history"]) }}
     where is_most_recent_record = true
 
 ), 
@@ -33,7 +33,7 @@ ads as (
 ad_sets as (
 
     select *
-    from {{ var('ad_set_history') }}
+    from {{ ref(var('fivetran_facebook')["ad_set_history"]) }}
     where is_most_recent_record = true
 
 ), 
@@ -41,7 +41,7 @@ ad_sets as (
 campaigns as (
 
     select *
-    from {{ var('campaign_history') }}
+    from {{ ref(var('fivetran_facebook')["campaign_history"]) }}
     where is_most_recent_record = true
 
 ), 

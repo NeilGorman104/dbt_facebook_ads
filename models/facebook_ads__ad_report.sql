@@ -11,7 +11,6 @@ accounts as (
 
     select *
     FROM {{ source('tap_facebook', 'account_history') }}
-    where is_most_recent_record = true
 
 ),
 
@@ -19,7 +18,6 @@ campaigns as (
 
     select *
     FROM {{ source('tap_facebook', 'campaign_history') }}
-    where is_most_recent_record = true
 
 ),
 
@@ -27,7 +25,6 @@ ad_sets as (
 
     select *
     FROM {{ source('tap_facebook', 'ad_set_history') }}
-    where is_most_recent_record = true
 
 ),
 
@@ -35,36 +32,35 @@ ads as (
 
     select *
     FROM {{ source('tap_facebook', 'ad_history') }}
-    where is_most_recent_record = true
 
 ),
 
 joined as (
 
     select 
-        report.date_day,
-        accounts.account_id,
-        accounts.account_name,
-        campaigns.campaign_id,
-        campaigns.campaign_name,
-        ad_sets.ad_set_id,
-        ad_sets.ad_set_name,
-        ads.ad_id,
-        ads.ad_name,
-        sum(report.clicks) as clicks,
+        report.date,
+        accounts.id as account_id,
+        accounts.name as account_name,
+        campaigns.id as campaign_id,
+        campaigns.name as campaign_name,
+        ad_sets.id as ad_set_id,
+        ad_sets.name as ad_set_name,
+        ads.id as ad_id,
+        ads.name as ad_name,
+        sum(report.inline_link_clicks) as clicks,
         sum(report.impressions) as impressions,
         sum(report.spend) as spend
 
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='facebook_ads__basic_ad_passthrough_metrics', transform = 'sum') }}
     from report 
     left join accounts
-        on report.account_id = accounts.account_id
+        on report.account_id = accounts.id
     left join ads 
-        on report.ad_id = ads.ad_id
+        on report.ad_id = ads.id
     left join campaigns
-        on ads.campaign_id = campaigns.campaign_id
+        on ads.campaign_id = campaigns.id
     left join ad_sets
-        on ads.ad_set_id = ad_sets.ad_set_id
+        on ads.ad_set_id = ad_sets.id
     {{ dbt_utils.group_by(9) }}
 )
 
